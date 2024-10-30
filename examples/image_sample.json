@@ -1,0 +1,15 @@
+{
+    "doc_id": "<docID>",
+    "img_id": "<imageID>",
+    "file": "<imageID>.jpg",
+    "event":{
+        "event_id": "<eventID>",
+        "event_type": "Movement:Transport",
+        "arguments":[
+            {
+                "role": "Artifact",
+                "bbox": [2172,1105,2618,1505]
+            }
+        ]
+    }
+}

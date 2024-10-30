@@ -1,0 +1,17 @@
+accelerate==0.30.1
+albucore==0.0.16
+albumentations==1.4.8
+datasets==2.19.2
+numpy==1.26.4
+opencv-python==4.9.0.80
+opencv-python-headless==4.10.0.82
+pandas==2.2.1
+scikit-learn==1.4.0
+scipy==1.12.0
+sentencepiece==0.2.0
+tokenizers==0.19.1
+torch==2.4.0
+torchvision==0.19.0
+transformers==4.41.0
+ultralytics==8.2.15
+wandb==0.12.21

@@ -1,0 +1,306 @@
+{
+    "Business:Declare-Bankruptcy": {
+        "event_type": "Business:Declare-Bankruptcy",
+        "keywords": ["bankruptcy", "bankrupt", "Bankruptcy"],
+        "event_desc": "The event is related to some organization declaring bankruptcy.",
+        "role_desc": {},
+        "eae_prompt": ["Org", "declared", "bankruptcy", "."],
+        "eae_slots": {"Org": {"start": 0, "end": 1}},
+        "valid_roles": ["Org"]
+    },
+    "Business:End-Org": {
+        "event_type": "Business:End-Org",
+        "keywords": ["dissolve", "disbanded", "close"],
+        "event_desc": "The event is related to some organization ceasing to exist.",
+        "role_desc": {},
+        "eae_prompt": ["Org", "dissolved", "at", "Place", "."],
+        "eae_slots": {"Org": {"start": 0, "end": 1}, "Place": {"start": 3, "end": 4}},
+        "valid roles": ["Org", "Place"]
+    },
+    "Business:Merge-Org": {
+        "event_type": "Business:Merge-Org",
+        "keywords": ["merge", "merging", "merger"],
+        "event_desc": "The event is related to two or more organization coming together to form a new organization.",
+        "role_desc": {},
+        "eae_prompt": ["Org", "was", "merged", "."],
+        "eae_slots": {"Org": {"start": 0, "end": 1}},
+        "valid_roles": ["Org"]
+    },
+    "Business:Start-Org": {
+        "event_type": "Business:Start-Org",
+        "keywords": ["founded", "create", "launch"],
+        "event_desc": "The event is related to a new organization being created.",
+        "role_desc": {},
+        "eae_prompt": ["Agent", "launched", "Org", "at", "Place", "."],
+        "eae_slots": {"Agent": {"start": 0, "end": 1}, "Org": {"start": 2, "end": 3}, "Place": {"start": 4, "end": 5}},
+        "valid roles": ["Agent", "Org", "Place"]
+    },
+    "Conflict:Attack": {
+        "event_type": "Conflict:Attack",
+        "keywords": ["war", "attack", "terrorism"],
+        "event_desc": "The event is related to conflict and some violent physical act.",
+        "role_desc": {"Attacker": "The attacking/instigating agent.", "Target": "The target of the attack (including unintended targets).",
+                      "Instrument": "The device used in the attack.", "Place": "Where the attack takes place."},
+        "eae_prompt": ["Attacker", "attacked", "Target", "using", "Instrument", "at", "Place", "."],
+        "eae_slots": {"Attacker": {"start": 0, "end": 1}, "Target": {"start": 2, "end": 3}, "Instrument": {"start": 4, "end": 5}, "Place": {"start": 6, "end": 7}},
+        "valid_roles": ["Attacker", "Target", "Instrument", "Place"]
+    },
+    "Conflict:Demonstrate": {
+        "event_type": "Conflict:Demonstrate",
+        "keywords": ["rally", "protest", "demonstrate"],
+        "event_desc": "The event is related to a large number of people coming together to protest.",
+        "role_desc": {"Entity": "The demonstrating agent.", "Place": "Where the demonstration takes place.",
+                      "Police": "The police officers involved.", "Instrument": "The device used for demonstration."},
+        "eae_prompt": ["Entity", "protested", "besides", "Police", "using", "Instrument", "at", "Place", "."],
+        "eae_slots": {"Entity": {"start": 0, "end": 1}, "Police": {"start": 3, "end": 4}, "Instrument": {"start": 5, "end": 6}, "Place": {"start": 7, "end": 8}},
+        "valid_roles": ["Entity", "Police", "Instrument", "Place"]
+    },
+    "Contact:Meet": {
+        "event_type": "Contact:Meet",
+        "keywords": ["meeting", "met", "summit"],
+        "event_desc": "The event is related to a group of people meeting and interacting with one another face-to-face.",
+        "role_desc": {"Entity": "The agents who are meeting.", "Place": "Where the meeting takes place."},
+        "eae_prompt": ["Entity", "met", "at", "Place", "."],
+        "eae_slots": {"Entity": {"start": 0, "end": 1}, "Place": {"start": 3, "end": 4}},
+        "valid_roles": ["Entity", "Place"]
+    },
+    "Contact:Phone-Write": {
+        "event_type": "Contact:Phone-Write",
+        "keywords": ["call", "communicate", "e-mail"],
+        "event_desc": "The event is related to people phone calling or messaging one another.",
+        "role_desc": {"Entity": "The communicating agents.", "Place": "Where the meeting takes place.",
+                      "Instrument": "The device used for communication."},
+        "eae_prompt": ["Entity", "called", "or", "texted", "messages", "using", "Instrument", "at", "Place", "."],
+        "eae_slots": {"Entity": {"start": 0, "end": 1}, "Instrument": {"start": 6, "end": 7}, "Place": {"start": 8, "end": 9}},
+        "valid_roles": ["Entity", "Place", "Instrument"]
+    },
+    "Justice:Acquit": {
+        "event_type": "Justice:Acquit",
+        "keywords": ["acquitted", "acquittal", "acquit"],
+        "event_desc": "The event is related to someone being acquitted.",
+        "role_desc": {},
+        "eae_prompt": ["Defendant", "was", "acquitted", "of", "the", "charges", "by", "Adjudicator", "."],
+        "eae_slots": {"Defendant": {"start": 0, "end": 1}, "Adjudicator": {"start": 7, "end": 8}},
+        "valid_roles": ["Defendant", "Adjudicator"]
+    },
+    "Justice:Appeal": {
+        "event_type": "Justice:Appeal",
+        "keywords": ["appeal", "appealing", "appeals"],
+        "event_desc": "The event is related to someone appealing the decision of a court.",
+        "role_desc": {},
+        "eae_prompt": ["Plaintiff", "appealed", "the", "adjudication", "from", "Adjudicator", "at", "Place", "."],
+        "eae_slots": {"Plaintiff": {"start": 0, "end": 1}, "Adjudicator": {"start": 5, "end": 6}, "Place": {"start": 7, "end": 8}},
+        "valid_roles": ["Plaintiff", "Place", "Adjudicator"]
+    },
+    "Justice:Arrest-Jail": {
+        "event_type": "Justice:Arrest-Jail",
+        "keywords": ["arrest", "jail", "detained"],
+        "event_desc": "The event is related to a person getting arrested or a person being sent to jail.",
+        "role_desc": {"Person": "The person who is jailed or arrested.", "Agent": "The jailer or the arresting agent.",
+                      "Instrument": "The device used to arrest person.", "Place": "Where the person is arrested or where they are in jail."},
+        "eae_prompt": ["Person", "was", "sent", "to", "jail", "or", "arrested", "by", "Agent", "using", "Instrument", "at", "Place", "."],
+        "eae_slots": {"Person": {"start": 0, "end": 1}, "Agent": {"start": 8, "end": 9}, "Instrument": {"start": 10, "end": 11}, "Place": {"start": 12, "end": 13}},
+        "valid_roles": ["Person", "Agent", "Instrument", "Place"]
+    },
+    "Justice:Charge-Indict": {
+        "event_type": "Justice:Charge-Indict",
+        "keywords": ["indict", "charged", "accused"],
+        "event_desc": "The event is related to someone or some organization being accused of a crime.",
+        "role_desc": {},
+        "eae_prompt": ["Defendant", "was", "charged", "by", "Prosecutor", "at", "Place", ",", "and", "the", "adjudication", "was", "judged", "by", "Adjudicator", "."],
+        "eae_slots": {"Defendant": {"start": 0, "end": 1}, "Prosecutor": {"start": 4, "end": 5}, "Place": {"start": 6, "end": 7}, "Adjudicator": {"start": 14, "end": 15}},
+        "valid_roles": ["Defendant", "Prosecutor", "Place", "Adjudicator"]
+    }, 
+    "Justice:Convict": {
+        "event_type": "Justice:Convict",
+        "keywords": ["convicted", "guilty", "verdict"],
+        "event_desc": "The event is related to someone being found guilty of a crime.",
+        "role_desc": {},
+        "eae_prompt": ["Defendant", "was", "convicted", "of", "a", "crime", "at", "Place", ",", "and", "the", "adjudication", "was", "judged", "by", "Adjudicator", "."],
+        "eae_slots": {"Defendant": {"start": 0, "end": 1}, "Place": {"start": 7, "end": 8}, "Adjudicator": {"start": 15, "end": 16}},
+        "valid_roles": ["Defendant", "Place", "Adjudicator"]
+    }, 
+    "Justice:Execute": {
+        "event_type": "Justice:Execute",
+        "keywords": ["execution", "executed", "execute"],
+        "event_desc": "The event is related to someone being executed to death.",
+        "role_desc": {},
+        "eae_prompt": ["Person", "was", "executed", "by", "Agent", "at", "Place", "."],
+        "eae_slots": {"Person": {"start": 0, "end": 1}, "Agent": {"start": 4, "end": 5}, "Place": {"start": 6, "end": 7}},
+        "valid_roles": ["Person", "Agent", "Place"]
+    },
+    "Justice:Extradite": {
+        "event_type": "Justice:Extradite",
+        "keywords": ["extradition", "extradited", "extraditing"],
+        "event_desc": "The event is related to justice. The event occurs when a person was extradited from one place to another place.",
+        "role_desc": {},
+        "eae_prompt": ["Person", "was", "extradicted", "from", "Origin", "to", "Destination", ",", "and", "Agent", "was", "responsible", "for", "the", "extradition", "."],
+        "eae_slots": {"Person": {"start": 0, "end": 1}, "Origin": {"start": 4, "end": 5}, "Destination": {"start": 6, "end": 7}, "Agent": {"start": 9, "end": 10}},
+        "valid roles": ["Person", "Destination", "Origin", "Agent"]
+    },
+    "Justice:Fine": {
+        "event_type": "Justice:Fine",
+        "keywords": ["fine", "fined", "payouts"],
+        "event_desc": "The event is related to someone being issued a financial punishment.",
+        "role_desc": {},
+        "eae_prompt": ["Entity", "at", "Place", "was", "ordered", "by", "Adjudicator", "to", "pay", "a", "fine", "."],
+        "eae_slots": {"Entity": {"start": 0, "end": 1}, "Place": {"start": 2, "end": 3}, "Adjudicator": {"start": 6, "end": 7}},
+        "valid_roles": ["Entity", "Place", "Adjudicator"]
+    },
+    "Justice:Pardon": {
+        "event_type": "Justice:Pardon",
+        "keywords": ["pardon", "pardoned", "remission"],
+        "event_desc": "The event is related to someone being pardoned.",
+        "role_desc": {},
+        "eae_prompt": ["Defendant", "received", "a", "pardon", "from", "Adjudicator", "."],
+        "eae_slots": {"Defendant": {"start": 0, "end": 1}, "Adjudicator": {"start": 5, "end": 6}},
+        "valid_roles": ["Defendant", "Adjudicator"]
+    }, 
+    "Justice:Release-Parole": {
+        "event_type": "Justice:Release-Parole",
+        "keywords": ["parole", "release", "free"],
+        "event_desc": "The event is related to an end to someone's custody in prison.",
+        "role_desc": {},
+        "eae_prompt": ["Person", "was", "released", "by", "Entity", "from", "Place", "."],
+        "eae_slots": {"Person": {"start": 0, "end": 1}, "Entity": {"start": 4, "end": 5}, "Place": {"start": 6, "end": 7}},
+        "valid_roles": ["Person", "Entity", "Place"]
+    },
+    "Justice:Sentence": {
+        "event_type": "Justice:Sentence",
+        "keywords": ["sentenced", "sentencing", "sentence"],
+        "event_desc": "The event is related to someone being sentenced to punishment because of a crime.",
+        "role_desc": {},
+        "eae_prompt": ["Defendant", "was", "sentenced", "to", "punishment", "at", "Place", ",", "and", "the", "adjudication", "was", "judged", "by", "Adjudicator", "."],
+        "eae_slots": {"Defendant": {"start": 0, "end": 1}, "Place": {"start": 6, "end": 7}, "Adjudicator": {"start": 14, "end": 15}},
+        "valid_roles": ["Defendant", "Place", "Adjudicator"]
+    }, 
+    "Justice:Sue": {
+        "event_type": "Justice:Sue",
+        "keywords": ["sue", "lawsuit", "suit"],
+        "event_desc": "The event is related to a court proceeding that has been initiated and someone sue the other.",
+        "role_desc": {},
+        "eae_prompt": ["Defendant", "was", "sued", "by", "Plaintiff", "at", "Place", ",", "and", "the", "adjudication", "was", "judged", "by", "Adjudicator", "."],
+        "eae_slots": {"Defendant": {"start": 0, "end": 1}, "Plaintiff": {"start": 4, "end": 5}, "Place": {"start": 6, "end": 7}, "Adjudicator": {"start": 14, "end": 15}},
+        "valid_roles": ["Defendant", "Plaintiff", "Place", "Adjudicator"]
+    }, 
+    "Justice:Trial-Hearing": {
+        "event_type": "Justice:Trial-Hearing",
+        "keywords": ["trial", "hearing", "proceeding"],
+        "event_desc": "The event is related to a trial or hearing for someone.",
+        "role_desc": {},
+        "eae_prompt": ["Defendant", "prosecuted", "by", "Prosecutor", ",", "faced", "a", "trial", "at", "Place", ",", "and", "the", "hearing", "was", "judged", "by", "Adjudicator", "."],
+        "eae_slots": {"Defendant": {"start": 0, "end": 1}, "Prosecutor": {"start": 3, "end": 4}, "Place": {"start": 9, "end": 10}, "Adjudicator": {"start": 17, "end": 18}},
+        "valid_roles": ["Defendant", "Prosecutor", "Place", "Adjudicator"]
+    }, 
+    "Life:Be-Born": {
+        "event_type": "Life:Be-Born",
+        "keywords": ["born", "birth", "bore"],
+        "event_desc": "The event is related to life and someone is given birth to.",
+        "role_desc": {},
+        "eae_prompt": ["Person", "was", "born", "at", "Place", "."],
+        "eae_slots": {"Person": {"start": 0, "end": 1}, "Place": {"start": 4, "end": 5}},
+        "valid_roles": ["Person", "Place"]
+    }, 
+    "Life:Die": {
+        "event_type": "Life:Die",
+        "keywords": ["kill", "death", "assassination"],
+        "event_desc": "The event is related to life and someone died.",
+        "role_desc": {"Agent": "The attacking agent / The killer.", "Victim": "The person(s) who died.",
+                      "Instrument": "The device used to kill.", "Place": "Where the death takes place."},
+        "eae_prompt": ["Agent", "killed", "Victim", "with", "Instrument", "at", "Place", "."],
+        "eae_slots": {"Agent": {"start": 0, "end": 1}, "Victim": {"start": 2, "end": 3}, "Instrument": {"start": 4, "end": 5}, "Place": {"start": 6, "end": 7}},
+        "valid_roles": ["Agent", "Victim", "Instrument", "Place"]
+    },
+    "Life:Divorce": {
+        "event_type": "Life:Divorce",
+        "keywords": ["divorce", "divorced", "Divorce"],
+        "event_desc": "The event is related to life and someone was divorced.",
+        "role_desc": {},
+        "eae_prompt": ["Person", "divorced", "at", "Place", "."],
+        "eae_slots": {"Person": {"start": 0, "end": 1}, "Place": {"start": 3, "end": 4}},
+        "valid_roles": ["Person", "Place"]
+    }, 
+    "Life:Injure": {
+        "event_type": "Life:Injure",
+        "keywords": ["injure", "wounded", "hurt"],
+        "event_desc": "The event is related to life and someone is injured.",
+        "role_desc": {},
+        "eae_prompt": ["Agent", "injured", "Victim", "with", "Instrument", "at", "Place", "."],
+        "eae_slots": {"Agent": {"start": 0, "end": 1}, "Victim": {"start": 2, "end": 3}, "Instrument": {"start": 4, "end": 5}, "Place": {"start": 6, "end": 7}},
+        "valid_roles": ["Agent", "Victim", "Instrument", "Place"]
+    },
+    "Life:Marry": {
+        "event_type": "Life:Marry",
+        "keywords": ["marry", "marriage", "married"],
+        "event_desc": "The event is related to life and someone is married.",
+        "role_desc": {},
+        "eae_prompt": ["Person", "got", "married", "at", "Place", "."],
+        "eae_slots": {"Person": {"start": 0, "end": 1}, "Place": {"start": 4, "end": 5}},
+        "valid_roles": ["Person", "Place"]
+    },
+    "Movement:Transport": {
+        "event_type": "Movement:Transport",
+        "keywords": ["travel", "go", "move"],
+        "event_desc": "The event is related to movement. The event occurs when a weapon or vehicle is moved from one place to another.",
+        "role_desc": {"Artifact": "The person doing the traveling or the artifact being transported.", "Destination": "Where the transporting is directed.",
+                      "Origin": "Where the transporting originated.", "Vehicle": "The vehicle used to transport.", "Agent": "The agent responsible for the transport."},
+        "eae_prompt": ["Agent", "transported", "Artifact", "in", "Vehicle", "from", "Origin", "to", "Destination",  "."],
+        "eae_slots": {"Agent": {"start": 0, "end": 1}, "Artifact": {"start": 2, "end": 3}, "Vehicle": {"start": 4, "end": 5}, "Origin": {"start": 6, "end": 7}, "Destination": {"start": 8, "end": 9}},
+        "valid_roles": ["Artifact", "Destination", "Origin", "Vehicle", "Agent"]
+    },
+    "Personnel:Elect": {
+        "event_type": "Personnel:Elect",
+        "keywords": ["election", "elect", "elected"],
+        "event_desc": "The event is related to a candidate wins an election.",
+        "role_desc": {},
+        "eae_prompt": ["Entity", "elected", "Person", "at", "Place", "for", "position", "."],
+        "eae_slots": {"Entity": {"start": 0, "end": 1}, "Person": {"start": 2, "end": 3}, "Place": {"start": 4, "end": 5}},
+        "valid_roles": ["Person", "Entity", "Place"]
+    },
+    "Personnel:End-Position": {
+        "event_type": "Personnel:End-Position",
+        "keywords": ["former", "laid off", "fired"],
+        "event_desc": "The event is related to a person stops working for an organization or a hiring manager.",
+        "role_desc": {},
+        "eae_prompt": ["Person", "stopped", "working", "for", "Entity", "at", "Place", "."],
+        "eae_slots": {"Person": {"start": 0, "end": 1}, "Entity": {"start": 4, "end": 5}, "Place": {"start": 6, "end": 7}},
+        "valid_roles": ["Person", "Entity", "Place"]
+    }, 
+    "Personnel:Nominate": {
+        "event_type": "Personnel:Nominate",
+        "keywords": ["named", "nomination", "nominate"],
+        "event_desc": "The event is related to a person being nominated for a position.",
+        "role_desc": {},
+        "eae_prompt": ["Person", "was", "nominated", "by", "Agent", "to", "do", "a", "job", "."],
+        "eae_slots": {"Person": {"start": 0, "end": 1}, "Agent": {"start": 4, "end": 5}},
+        "valid_roles": ["Person", "Agent"]
+    },  
+    "Personnel:Start-Position": {
+        "event_type": "Personnel:Start-Position",
+        "keywords": ["hire", "appoint", "join"],
+        "event_desc": "The event is related to a person begins working for an organization or a hiring manager.",
+        "role_desc": {},
+        "eae_prompt": ["Person", "got", "new", "job", "and", "was", "hired", "by", "Entity", "at", "Place", "."],
+        "eae_slots": {"Person": {"start": 0, "end": 1}, "Entity": {"start": 8, "end": 9}, "Place": {"start": 10, "end": 11}},
+        "valid_roles": ["Person", "Entity", "Place"]
+    },  
+    "Transaction:Transfer-Money": {
+        "event_type": "Transaction:Transfer-Money",
+        "keywords": ["pay", "donation", "loan"],
+        "event_desc": "The event is related to transaction. The event occurs when someone is giving, receiving, borrowing, or lending money.",
+        "role_desc": {"Giver": "The donating agent.", "Recipient": "The recipient agent.", "Money": "The amount given, donated or loaned.", 
+                      "Place": "Where the transaction takes place.", "Beneficiary": "The agent that benefits from the transfer."},
+        "eae_prompt": ["Giver", "paid", "Recipient", "with", "Money", "for", "the", "benefit", "of", "Beneficiary", "at", "Place", "."],
+        "eae_slots": {"Giver": {"start": 0, "end": 1}, "Recipient": {"start": 2, "end": 3}, "Money": {"start": 4, "end": 5}, "Beneficiary": {"start": 9, "end": 10}, "Place": {"start": 11, "end": 12}},
+        "valid_roles": ["Giver", "Recipient", "Money", "Place", "Beneficiary"]
+    },  
+    "Transaction:Transfer-Ownership": {
+        "event_type": "Transaction:Transfer-Ownership",
+        "keywords": ["sell", "buy", "acquire"],
+        "event_desc": "The event is related to transaction. The event occurs when an item or an organization is sold or gave to some other.",
+        "role_desc": {},
+        "eae_prompt": ["Buyer", "got", "Artifact", "from", "Seller", "to", "Beneficiary", "at", "Place", "."],
+        "eae_slots": {"Buyer": {"start": 0, "end": 1}, "Artifact": {"start": 2, "end": 3}, "Seller": {"start": 4, "end": 5}, "Beneficiary": {"start": 6, "end": 7}, "Place": {"start": 8, "end": 9}},
+        "valid_roles": ["Buyer", "Artifact", "Seller", "Place", "Beneficiary"] 
+    }
+}

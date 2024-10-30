@@ -1,0 +1,32 @@
+{  
+    "doc_id": "<docID>", 
+    "wnd_id": "<sentID>", 
+    "tokens": ["<token1>", "<token2>", "<token3>"],
+    "entities": [
+        {
+            "id": "<entityID>",
+            "entity_type": "PER",
+            "text": "<entity-span>", 
+            "start": 9,
+            "end": 10
+        }
+    ],
+    "events": [
+        {
+            "id": "<eventID>",
+            "event_type": "Conflict:Attack",
+            "text": "<trigger-span>",
+            "start": 6,
+            "end": 7,
+            "arguments": [
+                {
+                    "entity_id": "<entityID>",
+                    "role": "Agent",
+                    "text": "<argumentSpan>",
+                    "start": 9,
+                    "end": 10
+                }
+            ]
+        }
+    ]
+}
