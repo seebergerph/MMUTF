@@ -28,7 +28,7 @@ pip install -r requirements.txt
 
 ## Quickstart
 
-Train and test your own model using the `mmutf.py` script. To reproduce the results of our work, simply run `mmutf.sh`, which includes all necessary parameters. For testing only, remove `--do_train` and add the `--do_test` flag along with the `--checkpoint` path to your best model weights. 
+Train and test your own model using the `mmutf.py` script. To reproduce the results of our work, simply run `mmutf.sh`, which includes all necessary parameters. For testing only, remove `--do_train` and add the `--do_eval` flag along with the `--checkpoint` path to your best model weights. 
 
 ```bash
 # Run YOLOv8 object predictions
