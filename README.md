@@ -20,11 +20,11 @@ pip install -r requirements.txt
 
 ## Data
 
-**ACE:** Textual event extraction data for training can be downloaded at [ACE2005](). We follow the preprocessing format of [TextEE]() and use the train and development split for training and test split for validation. The sample format is shown in `examples/text_sample.json`. Note that the ACE2005 dataset is only accessible with the respective LDC license.
+**ACE:** Textual event extraction data for training can be downloaded at [ACE2005](https://catalog.ldc.upenn.edu/LDC2006T06). We follow the preprocessing format of [TextEE](https://github.com/ej0cl6/TextEE) and use the train and development split for training and test split for validation. The sample format is shown in `examples/text_sample.json`. Note that the ACE2005 dataset is only accessible with the respective LDC license.
 
-**SWiG:** Visual event extraction data for training can be downloaded at [SWiG](). We use the train and development split for training and test split for validation. Therefore, you simply can combine the `train.json` and `dev.json` files. For training, we use a simple data augmentation pipeline based on the module `albumentations`.
+**SWiG:** Visual event extraction data for training can be downloaded at [SWiG](https://github.com/allenai/swig). We use the train and development split for training and test split for validation. Therefore, you simply can combine the `train.json` and `dev.json` files. For training, we use a simple data augmentation pipeline based on the module `albumentations`.
 
-**M2E2:** Multimedia event extraction data for testing can be downloaded at [M2E2](). We provide the YOLOv8 object detections in `data/objects/m2e2.pkl` but you can use your own object detection results following the `utils/objects/detection.py` script. For fair comparison, we additionally provide the event detection results in `data/triggers`. Prepare the M2E2 benchmark into the correct format with `utils/m2e2/prepare.py`.
+**M2E2:** Multimedia event extraction data for testing can be downloaded at [M2E2](https://github.com/limanling/m2e2). We provide the YOLOv8 object detections in `data/objects/m2e2.pkl` but you can use your own object detection results following the `utils/objects/detection.py` script. For fair comparison, we additionally provide the event detection results in `data/triggers`. Prepare the M2E2 benchmark into the correct format with `utils/m2e2/prepare.py`.
 
 ## Quickstart
 
