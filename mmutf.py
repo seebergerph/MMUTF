@@ -89,6 +89,8 @@ def parse_args():
     parser.add_argument("--m2e2_img_triggers_file", type=str, required=True)
     parser.add_argument("--m2e2_img_dir", type=str, required=True)
     parser.add_argument("--swig2ace_mapping_file", type=str, required=True)
+    parser.add_argument("--multimedia_coref_golds_file", type=str, required=False)
+    parser.add_argument("--multimedia_coref_preds_file", type=str, required=False)
     return parser.parse_args()
 
 
@@ -422,6 +424,75 @@ def main(args):
         img_eae_scores_file = os.path.join(args.output_dir, "img_eae_results.json")
         with open(img_eae_preds_file, "w") as fp: json.dump(img_eae_preds, fp)
         with open(img_eae_scores_file, "w") as fp: json.dump(img_eae_scores, fp)
+
+        ###
+
+        ### Evaluate multimedia EAE
+
+        if args.multimedia_coref_preds_file and args.multimedia_coref_golds_file:
+            print("### EVENT ARGUMENTS (MULTIMEDIA)")
+
+            with open(args.multimedia_coref_golds_file, "r") as fp: corefs_golds = json.load(fp)
+            with open(args.multimedia_coref_preds_file, "r") as fp: corefs_preds = json.load(fp)
+            print(f"[INFO] Loaded {len(corefs_golds)} coref events (GOLDS)")
+            print(f"[INFO] Loaded {len(corefs_preds)} coref events (PREDS)")
+
+            # Pred events
+            multimedia_eae_golds_set = {"text_ids": set(), "img_ids": set()}
+            multimedia_eae_preds_set = {"text_ids": set(), "img_ids": set()}
+
+            for item in corefs_golds:
+                multimedia_eae_golds_set["text_ids"].add(item[0])
+                multimedia_eae_golds_set["img_ids"].add(item[1])
+
+            for item in corefs_preds:
+                multimedia_eae_preds_set["text_ids"].add(item[0])
+                multimedia_eae_preds_set["img_ids"].add(item[1])    
+
+            multimedia_txt_eae_golds = []
+            for item in txt_eae_golds:
+                if item["wnd_id"] in multimedia_eae_golds_set["text_ids"]:
+                    multimedia_txt_eae_golds.append(item)
+
+            multimedia_txt_eae_preds = []
+            for item in txt_eae_preds:
+                if item["wnd_id"] in multimedia_eae_preds_set["text_ids"]:
+                    multimedia_txt_eae_preds.append(item)
+
+            multimedia_img_eae_golds = []
+            for item in img_eae_golds:
+                if item["wnd_id"] in multimedia_eae_golds_set["img_ids"]:
+                    multimedia_img_eae_golds.append(item)
+
+            multimedia_img_eae_preds = []
+            for item in img_eae_preds:
+                if item["wnd_id"] in multimedia_eae_preds_set["img_ids"]:
+                    multimedia_img_eae_preds.append(item)
+
+            multimedia_txt_scores = eval_text.compute_EAE_scores(
+                multimedia_txt_eae_preds, multimedia_txt_eae_golds
+            )["argument_cls"]
+            multimedia_img_scores = eval_image.compute_EAE_scores(
+                multimedia_img_eae_preds, multimedia_img_eae_golds
+            )["argument_cls"]
+
+            multimedia_eae_scores = {
+                "pred_num": multimedia_txt_scores["pred_num"] + multimedia_img_scores["pred_num"], 
+                "gold_num": multimedia_txt_scores["gold_num"] + multimedia_img_scores["gold_num"], 
+                "match_num": multimedia_txt_scores["match_num"] + multimedia_img_scores["match_num"],
+            }
+
+            multimedia_eae_metrics = eval_text.compute_f1(
+                multimedia_eae_scores["pred_num"], multimedia_eae_scores["gold_num"],
+                multimedia_eae_scores["match_num"]
+            )
+            multimedia_eae_scores["precision"] = multimedia_eae_metrics[0]
+            multimedia_eae_scores["recall"] = multimedia_eae_metrics[1]
+            multimedia_eae_scores["f1"] = multimedia_eae_metrics[2]
+            print(multimedia_eae_scores)
+
+            multimedia_scores_file = os.path.join(args.output_dir, "multimedia_results.json")
+            with open(multimedia_scores_file, "w") as fp: json.dump(multimedia_eae_scores, fp)
 
         ###
 
